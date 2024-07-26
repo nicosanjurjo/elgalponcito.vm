@@ -1,0 +1,51 @@
+{% extends "inicio\layout_inicio.html" %}
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href={% static "css/productos_styles.css" %} /> {% endblock %}
+
+{% block content %}
+<HR></HR>
+<H1>GESTION DE ZONAS DE REPARTO - ELGALPONCITO.VM</H1>
+<HR></HR>
+<div id="contenedor">
+    <a class="btn btn-primary" href="{% url 'NuevaZona' %}" role="button">Nueva zona</a>
+    <hr>
+	<table id="myTable" class="display">
+	    <thead>
+		<tr>
+		<th>Nombre</th>
+		<th>Descripcion</th>
+		<th>Precio</th>
+        <th>Disponible</th>
+        <th>Acciones</th>
+		</tr>
+		</thead>
+		<tbody>
+            {% for zona in zonas %}
+            <tr>
+                <td>{{ zona.nombre }}</td>
+                <td>{{ zona.descripcion }}</td>
+                <td>{{ zona.precio }}</td>
+                <td>{% if zona.disponible %}Sí{% else %}No{% endif %}</td>
+                <td>
+                    <a href="{% url 'update_zon' pk=zona.id %}">Editar</a>
+                    |
+                    <a href="{% url 'delete_zon' pk=zona.id %}">Eliminar</a>
+                </td>
+            </tr>
+        {% endfor %}
+		</tbody>
+		
+	</table>
+
+</div>
+
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable();
+    } );
+</script>
+
+
+{% endblock  %}

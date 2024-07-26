@@ -1,0 +1,52 @@
+{% extends "inicio\layout_inicio.html" %}
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href={% static "css/productos_styles.css" %} /> {% endblock %}
+
+{% block content %}
+<HR></HR>
+<h1>GESTION DE PRODUCTOS - ELGALPONCITO.VM</h1>
+<HR></HR>
+
+<div id="contenedor">
+    <a class="btn btn-primary" href="{% url 'NuevoProducto' %}" role="button">Nuevo producto</a>
+    <hr>
+	<table id="myTable" class="display">
+	    <thead>
+		<tr>
+		<th>Nombre</th>
+		<th>Descripcion</th>
+		<th>Precio</th>
+        <th>Disponible</th>
+        <th>Acciones</th>
+		</tr>
+		</thead>
+		<tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{% if producto.disponible %}Sí{% else %}No{% endif %}</td>
+                <td>
+                    <a href="{% url 'update_pro' pk=producto.id %}">Editar</a>
+                    |
+                    <a href="{% url 'delete_pro' pk=producto.id %}">Eliminar</a>
+                </td>
+            </tr>
+        {% endfor %}
+		</tbody>
+		
+	</table>
+
+</div>
+
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable();
+    } );
+</script>
+
+
+{% endblock  %}
