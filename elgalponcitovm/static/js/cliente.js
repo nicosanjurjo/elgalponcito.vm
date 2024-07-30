@@ -13,6 +13,7 @@ $(document).ready(function() {
             id: id,
             nombre: nombre,
             precio: precio,
+            masasxunidad: masasxunidad
         };
         // Agregar el nuevo producto a la lista
         productos.push(nuevoProducto);

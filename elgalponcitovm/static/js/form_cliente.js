@@ -12,12 +12,12 @@ $(document).ready(function() {
     function llenarTablaProductos() {
         let productos = JSON.parse(localStorage.getItem('productos')) || [];
         let tablaProductos = $('#tabla-productos');
-
+    
         // Vaciar la tabla antes de llenarla
         tablaProductos.empty();
-
+    
         totalAmount = 0;
-
+    
         productos.forEach(function(producto, index) {
             totalAmount += parseInt(producto.precio);
             let fila = `<tr>
@@ -27,10 +27,10 @@ $(document).ready(function() {
                         </tr>`;
             tablaProductos.append(fila);
         });
-
+    
         actualizarTotal();
     }
-
+    
     // Función para actualizar el total incluyendo el precio de la zona
     function actualizarTotal() {
         $('#total-amount').text((totalAmount + zonaPrecio));
@@ -39,9 +39,23 @@ $(document).ready(function() {
     // Función para eliminar un producto del Local Storage
     window.eliminarProducto = function(index) {
         let productos = JSON.parse(localStorage.getItem('productos')) || [];
-        productos.splice(index, 1); // Eliminar el producto del array
-        localStorage.setItem('productos', JSON.stringify(productos)); // Actualizar el Local Storage
-        llenarTablaProductos(); // Volver a llenar la tabla
+        
+        // Obtener el producto a eliminar
+        let productoAEliminar = productos[index];
+        
+        // Restar las masas correspondientes al producto eliminado del Local Storage
+        let masasActuales = parseInt(localStorage.getItem('masas')) || 0;
+        masasActuales -= parseInt(productoAEliminar.masasxunidad);
+        localStorage.setItem('masas', masasActuales);
+        
+        // Eliminar el producto del array
+        productos.splice(index, 1);
+        
+        // Actualizar el Local Storage
+        localStorage.setItem('productos', JSON.stringify(productos));
+        
+        // Volver a llenar la tabla
+        llenarTablaProductos();
     }
 
     // Llamar a la función para llenar la tabla al cargar la página
@@ -146,7 +160,8 @@ $(document).ready(function() {
             contentType: 'application/json', // Especifica el tipo de contenido como JSON
             success: function(response) {
                 alert('Pedido realizado con éxito');
-                localStorage.removeItem('productos'); // Limpiar el localStorage
+                localStorage.clear();
+                window.location.href = '/cliente'; // Limpiar el localStorage
             },
             error: function(error) {
                 alert('Error al realizar el pedido, por favor intente de nuevo.');
