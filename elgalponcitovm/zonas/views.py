@@ -14,9 +14,9 @@ def form_zonas(request):
             data_form=formulario.cleaned_data
 
             nueva_zona = Zona(
-                nombre=data_form['nombre'],
-                descripcion=data_form['descripcion'],
-                precio=data_form['precio'],
+                nombre_zona=data_form['nombre_zona'],
+                descripcion_zona=data_form['descripcion_zona'],
+                costo=data_form['costo'],
                 disponible=data_form['disponible']
                 )
 

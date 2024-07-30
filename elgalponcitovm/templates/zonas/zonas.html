@@ -1,8 +1,7 @@
-{% extends "inicio\layout_inicio.html" %}
+{% extends "gestion\index.html" %}
 
 {% load static %}
-{% block css %}
-<link rel="stylesheet" type="text/css" href={% static "css/productos_styles.css" %} /> {% endblock %}
+{% block css %}{% endblock %}
 
 {% block content %}
 <HR></HR>
@@ -24,9 +23,9 @@
 		<tbody>
             {% for zona in zonas %}
             <tr>
-                <td>{{ zona.nombre }}</td>
-                <td>{{ zona.descripcion }}</td>
-                <td>{{ zona.precio }}</td>
+                <td>{{ zona.nombre_zona }}</td>
+                <td>{{ zona.descripcion_zona }}</td>
+                <td>{{ zona.costo }}</td>
                 <td>{% if zona.disponible %}Sí{% else %}No{% endif %}</td>
                 <td>
                     <a href="{% url 'update_zon' pk=zona.id %}">Editar</a>

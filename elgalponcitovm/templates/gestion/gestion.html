@@ -1,0 +1,89 @@
+{% extends "gestion\index.html" %}
+{% load static %}
+
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href={% static "css/gestion_styles.css" %} />{% endblock %}
+{% block js %}
+<script type="text/javascript" src={% static "js/gestion.js" %}></script>{% endblock %}
+{% block content %}
+<div id="contenedor">
+  <div class="container-fluid">
+    <div class='on-off'>
+      <button class='btn btn-success habilitar'>Habilitar pedidos</button>
+      <div class='stock'>
+      {% for masa in cantidad  %}
+       <span id='stock-actual'>Masas disponibles<br>{{masa.cantidad_masas}}</span>
+       <button class='btn btn-primary incrementar'>Incrementar stock</button>
+       <button class='btn btn-primary decrementar'>Decrementar stock</button>
+      {% endfor %}
+      </div>
+      <button class='btn btn-danger'>Deshabilitar pedidos</button>
+    </div>
+    <hr>
+    <div data-bs-theme="light">
+      <table id="myTable" class="display">
+        <thead>
+         <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Monto</th>
+          <th>Horario</th>
+          <th>Direccion</th>
+          <th>Estado</th>
+        </tr>
+        </thead>
+        <tbody>
+         {% for pedido in pedidos %}
+          <tr>
+            <td>{{ pedido.id }}</td>
+            <td>{{ pedido.nombre }}</td>
+            <td>{{ pedido.cantidad }}</td>
+            <td>{{ pedido.monto }}</td>
+            <td>{% if pedido.horario %}{{pedido.horario}}{% else %}Cuando esté lista{% endif %}</td>
+            <td>{{ pedido.direccion }}</td>
+            <td>{{ pedido.estado }}</td>
+          </tr>
+         {% endfor %}
+       </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal fade" id="numberModal" tabindex="-1" aria-labelledby="numberModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="numberModalLabel">Ingrese el stock</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="number" id="numberInput" class="form-control" placeholder="Ingrese el stock">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="saveNumberBtn">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmModalLabel">Confirmar acción</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Está seguro que desea <span id="action-type"></span> el stock?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  {% endblock %}

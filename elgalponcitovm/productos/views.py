@@ -18,7 +18,8 @@ def form_productos(request):
                 nombre=data_form['nombre'],
                 descripcion=data_form['descripcion'],
                 precio=data_form['precio'],
-                disponible=data_form['disponible']
+                disponible=data_form['disponible'],
+                masasxunidad=data_form['masasxunidad']
                 )
 
             # Guardar en la base de datos

@@ -119,6 +119,7 @@ $(document).ready(function() {
         let detallesSimplificados = productos.map(function(producto) {
             return `${producto.nombre}: $${producto.precio}`;
         }).join(', ');
+        let masas=localStorage.getItem('masas');
             
     
         // Crear el objeto de datos del formulario
@@ -133,13 +134,14 @@ $(document).ready(function() {
             observaciones: observaciones,
             zona_id: metodoEntrega === 'envio' ? $('.seleccionar-zona.btn-success').data('zona-id') : null,
             monto: totalAmount + zonaPrecio,
-            detalles: detallesSimplificados
+            detalles: detallesSimplificados,
+            masas: masas
         };
     
         // Enviar el formulario usando AJAX
         $.ajax({
             type: 'POST',
-            url: 'confirmado/', // Reemplaza con la URL de tu vista en Django
+            url: 'confirmado/', //
             data: JSON.stringify(datosPedido),
             contentType: 'application/json', // Especifica el tipo de contenido como JSON
             success: function(response) {

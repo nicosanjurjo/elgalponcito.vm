@@ -5,6 +5,7 @@ class Producto(models.Model):
     descripcion = models.CharField(max_length=100)
     precio = models.IntegerField()
     disponible = models.BooleanField()
+    masasxunidad = models.IntegerField()
 
     def __str__(self):
         return f"{self.nombre}"
