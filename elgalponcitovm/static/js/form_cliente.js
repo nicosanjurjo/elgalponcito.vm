@@ -2,12 +2,6 @@ $(document).ready(function() {
     let totalAmount = 0;
     let zonaPrecio = 0;
 
-    window.vaciarCarritoform = function(){
-        localStorage.clear()
-        alert("Se eliminaron todos los productos del pedido, puedes volver a seleccionar");
-        location.href="../";
-    }
-
     // Función para llenar la tabla de productos con los datos del Local Storage
     function llenarTablaProductos() {
         let productos = JSON.parse(localStorage.getItem('productos')) || [];
@@ -39,14 +33,6 @@ $(document).ready(function() {
     // Función para eliminar un producto del Local Storage
     window.eliminarProducto = function(index) {
         let productos = JSON.parse(localStorage.getItem('productos')) || [];
-        
-        // Obtener el producto a eliminar
-        let productoAEliminar = productos[index];
-        
-        // Restar las masas correspondientes al producto eliminado del Local Storage
-        let masasActuales = parseInt(localStorage.getItem('masas')) || 0;
-        masasActuales -= parseInt(productoAEliminar.masasxunidad);
-        localStorage.setItem('masas', masasActuales);
         
         // Eliminar el producto del array
         productos.splice(index, 1);
@@ -96,6 +82,7 @@ $(document).ready(function() {
         actualizarTotal(); // Actualizar el total
     });
 
+
     $('.confirmado').click(function(event) {
 
         event.preventDefault(); // Prevenir el envío estándar del formulario
@@ -130,12 +117,16 @@ $(document).ready(function() {
 
         // Crear el array de detalles simplificados del pedido
         let productos = JSON.parse(localStorage.getItem('productos')) || [];
+
+        let productosIds = productos.map(function(producto) {
+            return producto.id;
+        });
+       
         let detallesSimplificados = productos.map(function(producto) {
             return `${producto.nombre}: $${producto.precio}`;
         }).join(', ');
-        let masas=localStorage.getItem('masas');
+        
             
-    
         // Crear el objeto de datos del formulario
         let datosPedido = {
             nombre: nombre,
@@ -149,7 +140,7 @@ $(document).ready(function() {
             zona_id: metodoEntrega === 'envio' ? $('.seleccionar-zona.btn-success').data('zona-id') : null,
             monto: totalAmount + zonaPrecio,
             detalles: detallesSimplificados,
-            masas: masas
+            productos_ids: productosIds // Añadir los IDs de los productos
         };
     
         // Enviar el formulario usando AJAX
@@ -159,7 +150,7 @@ $(document).ready(function() {
             data: JSON.stringify(datosPedido),
             contentType: 'application/json', // Especifica el tipo de contenido como JSON
             success: function(response) {
-                alert('Pedido realizado con éxito');
+                alert(`Pedido realizado con éxito\n\nDetalles del pedido:\n${detallesSimplificados}\n\nMonto total: $${totalAmount + zonaPrecio}\nSI ABONAS POR MP RECORDA ENVIAR EL COMPROBANTE AL 2657-584580`);
                 localStorage.clear();
                 window.location.href = '/cliente'; // Limpiar el localStorage
             },
@@ -170,8 +161,16 @@ $(document).ready(function() {
     });
     
     $('.volver').click(function(event) {
-        window.location.href = '/cliente'
+        window.location.href = '/cliente';
 
     })
+
+    $('.cancelar').click(function(event) {
+        localStorage.clear()
+        alert('Pedido cancelado');
+        window.location.href = '/cliente';
+
+    })
+
 });
 

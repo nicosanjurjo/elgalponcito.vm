@@ -1,4 +1,3 @@
-
 .navbar {
   background-color: #fff;
   height: 50px;
@@ -7,12 +6,10 @@
   padding: 0.5rem;
 }
 
-
 .navbar-toggler {
   border: none;
   font-size: 1.25rem;
 }
-
 
 .nav-link {
   color: #666777;
@@ -37,7 +34,6 @@
   width: 100%;
   visibility: visible;
 }
-
 
 body {
   position: relative;
@@ -73,6 +69,53 @@ footer {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Asegúrate de que el contenedor principal sea flexible */
+#contenedor {
+  overflow-x: auto;
+  padding: 10px;
+}
 
+.container-fluid {
+  padding: 0;
+}
 
+/* Asegúrate de que la tabla se ajuste al contenedor */
+#myTable {
+  width: 100%;
+  max-width: 100%;
+  table-layout: auto;
+}
 
+/* Ajusta las celdas de la tabla para que se envuelvan en pantallas pequeñas */
+#myTable th, #myTable td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Habilita el desplazamiento horizontal en pantallas pequeñas */
+@media (max-width: 768px) {
+  #myTable {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  #myTable th {
+    background: #f8f8f8;
+  }
+  
+  #myTable td {
+    border-top: 1px solid #e9ecef;
+  }
+
+  .on-off {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .on-off button {
+    margin-bottom: 10px;
+  }
+}

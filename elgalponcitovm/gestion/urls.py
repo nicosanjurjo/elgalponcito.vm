@@ -5,6 +5,8 @@ urlpatterns = [
    
     path('', views.gestion, name='Gestion'),
     path('establecer_stock/', views.establecer_stock, name='establecerStock'),
-    path('update_stock/', views.update_stock, name='update_stock')
+    path('update_stock/', views.update_stock, name='update_stock'),
+    path('obtener_pedido/', views.obtener_pedido, name='obtener_pedido'),
+    path('actualizar_pedido/', views.actualizar_pedido, name='actualizar_pedido')
 
 ]

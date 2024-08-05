@@ -22,6 +22,7 @@
                 <h5 class="card-title">{{ producto.nombre }}</h5>
                 <p class="card-text">{{ producto.descripcion }}</p>
                 <h6 class="card-text">${{ producto.precio }} </h6>
+                <h7 class="card-text"> {{ producto.masasxunidad }} </h6>
                 <button class="btn btn-primary" onclick="agregarProducto('{{ producto.id }}', '{{ producto.nombre }}', '{{ producto.precio }}','{{ producto.masasxunidad }}')">Agregar al pedido</button>
             </div>
         </div>

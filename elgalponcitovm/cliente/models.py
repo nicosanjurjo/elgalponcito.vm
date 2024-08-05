@@ -13,21 +13,15 @@ class Turno(models.Model):
         return self.pedidos_actuales < self.max_pedidos
 
 class Pedido(models.Model):
-    ESTADO_CHOICES = [
-        ('tomado', 'Tomado'),
-        ('en_proceso', 'En Proceso'),
-        ('terminado', 'Terminado'),
-        ('entregado', 'Entregado')
-    ]
 
     PAGO_CHOICES = [
-        ('efectivo', 'Efectivo'),
-        ('transferencia', 'Transferencia/MP')
+        ('Efectivo', 'Efectivo'),
+        ('Transferencia/MP', 'Transferencia/MP')
     ]
 
     ENTREGA_CHOICES = [
-        ('retiro', 'Retiro por local'),
-        ('envio', 'Envio a domicilio')
+        ('Retiro', 'Retiro por local'),
+        ('Envio', 'Envio a domicilio')
     ]
 
     nombre = models.CharField(max_length=25)
@@ -35,10 +29,10 @@ class Pedido(models.Model):
     cantidad = models.IntegerField()
     detalles = models.TextField()  # Este campo almacenará los detalles del pedido en formato JSON o texto plano.
     monto = models.IntegerField()
-    estado = models.CharField(max_length=15, choices=ESTADO_CHOICES, default='tomado')
+    estado = models.CharField(max_length=15, default='Tomado')
     horario = models.CharField(max_length=5, null=True, blank=True)
-    medio_pago = models.CharField(max_length=15, choices=PAGO_CHOICES, default='efectivo')
-    metodo_entrega = models.CharField(max_length=15, choices=ENTREGA_CHOICES, default='retiro')
+    medio_pago = models.CharField(max_length=25, choices=PAGO_CHOICES, default='Efectivo')
+    metodo_entrega = models.CharField(max_length=25, choices=ENTREGA_CHOICES, default='Retiro')
     direccion = models.CharField(max_length=200, blank=True, null=True)
     observaciones = models.TextField(max_length=150, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
