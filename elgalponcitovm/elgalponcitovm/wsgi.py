@@ -10,4 +10,4 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "elgalponcitovm.settings")
 application = get_wsgi_application()
 
 # wrapping up existing wsgi application
-application = WhiteNoise(application, root="static")
+application = WhiteNoise(application, root="staticfiles")
