@@ -26,8 +26,8 @@ handler404 = custom_404
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('productos/', include('productos.urls')),
-    path('zonas/', include('zonas.urls')),
-    path('cliente/', include('cliente.urls')),
-    path('gestion/', include('gestion.urls'))
+    path('gestionargalponcito/productos/', include('productos.urls')),
+    path('gestionargalponcito/zonas/', include('zonas.urls')),
+    path('', include('cliente.urls')),
+    path('gestionargalponcito/', include('gestion.urls'))
 ]
