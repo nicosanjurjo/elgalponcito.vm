@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-dlek$ou&2ts@k4cp(-!+oqki60fkd&k79zaowr(1$nd92sllx7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.108', '192.168.100.50', '192.168.3.229', '91.108.124.221']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.108', '192.168.100.50', '192.168.3.229', '91.108.124.221', 'elgalponcitovm.com.ar']
 
 
 # Application definition
@@ -132,4 +132,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ['http://91.108.124.221']
+CSRF_TRUSTED_ORIGINS = ['http://91.108.124.221', 'http://elgalponcitovm.com.ar', 'https://elgalponcitovm.com.ar', 'http://www.elgalponcitovm.com.ar', 'https://www.elgalponcitovm.com.ar' ]

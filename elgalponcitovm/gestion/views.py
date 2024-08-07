@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from cliente.models import Pedido, Turno
 from .models import Stock
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
 import json
 
 def gestion(request):
@@ -44,9 +45,11 @@ def obtener_pedido(request):
     if request.method == 'GET':
         pedido_id = request.GET.get('id')
         pedido = get_object_or_404(Pedido, id=pedido_id)
+        # Convert the 'created_at' datetime to the local timezone
+        ingreso_local = timezone.localtime(pedido.created_at, timezone.get_current_timezone())
         pedido_data = {
             'id': pedido.id,
-            'ingreso': pedido.created_at,
+            'ingreso': ingreso_local.isoformat(),
             'nombre': pedido.nombre,
             'telefono': pedido.telefono,
             'cantidad': pedido.cantidad,
