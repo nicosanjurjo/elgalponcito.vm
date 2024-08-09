@@ -164,7 +164,6 @@ $(document).ready(function() {
     $('.cancelar').click(function(event) {
         localStorage.clear()
         alert('Pedido cancelado');
-        location.href = 'cliente.html';
 
     })
 
