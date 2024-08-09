@@ -160,15 +160,11 @@ $(document).ready(function() {
         });
     });
     
-    $('.volver').click(function(event) {
-        window.location.href = '/cliente';
-
-    })
 
     $('.cancelar').click(function(event) {
         localStorage.clear()
         alert('Pedido cancelado');
-        window.location.href = '/cliente';
+        location.href = 'cliente.html';
 
     })
 
